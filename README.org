@@ -1,0 +1,18 @@
+* INTRODUCTION
+/This is a [[https://forum.taichi-lang.cn/t/topic/3506][Taichi Hackathon 2022]] project./
+
+Splatoooooon is an ink splash simulator, using a physical and almost real way (in Taichi Lang), in order to find out:
+1. if it is a big difference between physical simulator and the ink effect in game *Splatoon* (All rights reserved by Nintendo)
+2. how much will it cost if *Splatoon* use a physical way
+
+** Steps
+- 流体仿真知识补全学习
+- 选取一种简单的枪械并简化模型，选用一种仿真方法去模拟
+- 屏幕空间呈现 (2D, Top-down view first; and 3D if possible)
+- (optional)增加一点点Gameplay机制
+- (optional)增加GUI用于实时调参
+- (optional)美化配色以及GUI
+
+* ABOUT ME
+- 团队名： _先赶紧码出来再去考虑对不_ 队
+- 项目名： _Splatoooooon_
