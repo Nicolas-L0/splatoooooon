@@ -1,1 +1,3 @@
-.org~
+*
+!README.org
+!*.py

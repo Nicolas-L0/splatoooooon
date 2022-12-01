@@ -1,18 +1,37 @@
+#+title: README.org
+#+filetags: :Taichi_Hackathon_2022:
+#+TODO: [TODO] [DOING] | [DONE]
+
 * INTRODUCTION
 /This is a [[https://forum.taichi-lang.cn/t/topic/3506][Taichi Hackathon 2022]] project./
 
 Splatoooooon is an ink splash simulator, using a physical and almost real way (in Taichi Lang), in order to find out:
 1. if it is a big difference between physical simulator and the ink effect in game *Splatoon* (All rights reserved by Nintendo)
 2. how much will it cost if *Splatoon* use a physical way
-
-** Steps
+   
+** Todos
 - 流体仿真知识补全学习
-- 选取一种简单的枪械并简化模型，选用一种仿真方法去模拟
+- 选取游戏中的一种简单武器，分析并简化子弹/墨水喷出与落地飞溅的模型，选用一种仿真方法去模拟
 - 屏幕空间呈现 (2D, Top-down view first; and 3D if possible)
-- (optional)增加一点点Gameplay机制
-- (optional)增加GUI用于实时调参
+- 增加GUI component用于实时调参，便于优化墨水质感、调试出不同武器模板
+- (optional)增加一点点Gameplay机制：move, enemies, hit, score ...
 - (optional)美化配色以及GUI
 
+** Steps
+*** Display
+**** [DOING] GGUI
+- mpm128_ggui :: ~ti example -s mpm128_ggui.py~
+- mpm3d_ggui :: ~ti example -s mpm3d_ggui.py~ 
+- taichi doc :: https://docs.taichi-lang.org/docs/ggui
+***** [DONE] display <2022-12-01 周四 22:55>
+***** [TODO] components
+**** Rendering
+***** Rasterizer
+- rasterizer.py :: ~ti example -s rasterizer.py~
+**** Physics
+***** MLS-MPM
+- GAMES201 Lec8 :: https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
 * ABOUT ME
-- 团队名： _先赶紧码出来再去考虑对不_ 队
-- 项目名： _Splatoooooon_
+** As a contestant
+- 团队名 :: 先赶紧码出来再去考虑对不 队
+- 项目名 :: Splatoooooon
