@@ -1,22 +1,13 @@
-#+title: README.org
 #+filetags: :Taichi_Hackathon_2022:
 #+TODO: [TODO] [DOING] | [DONE]
 
-* INTRODUCTION
+* Splatoooooon - a crazy ink splash simulator
+** BRIEF INTRO
 /This is a [[https://forum.taichi-lang.cn/t/topic/3506][Taichi Hackathon 2022]] project./
 
-Splatoooooon is an ink splash simulator, using a physical and almost real way (in Taichi Lang), in order to find out:
-1. if it is a big difference between physical simulator and the ink effect in game *Splatoon* (All rights reserved by Nintendo)
-2. how much will it cost if *Splatoon* use a physical way
-   
-** Todos
-- 流体仿真知识补全学习
-- 选取游戏中的一种简单武器，分析并简化子弹/墨水喷出与落地飞溅的模型，选用一种仿真方法去模拟
-- 屏幕空间呈现 (2D, Top-down view first; and 3D if possible)
-- 增加GUI component用于实时调参，便于优化墨水质感、调试出不同武器模板
-- (optional)增加一点点Gameplay机制：move, enemies, hit, score ...
-- (optional)美化配色以及GUI
+Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Gameplay机制）。
 
+<<<<<<< HEAD
 ** Steps
 - Display
   - [1/2] GGUI
@@ -35,8 +26,43 @@ Splatoooooon is an ink splash simulator, using a physical and almost real way (i
       - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
       - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
 
+=======
+每当在游玩Splatoon时我总会好奇：如果将游戏中这种“高浓度的”墨汁喷洒到现实生活中会形成什么样的墨迹？游戏与现实会有多大区别？完全基于物理仿真实现的墨迹对游戏性能会有多大的"拖累"？
+
+当然，这个项目最大的目的是Push我自己学习Taichi、学习流体仿真。
+
+/(ps. 额啊啊啊..步子迈大了..对初学者来说是一个不小的挑战呢...挠头发.gif...<2022-12-02 周五 18:50> )/
+
+/(加油... :) ... <2022-12-03 周六 10:40> )/
+   
+** GOALS (又名 立下Flag)
+In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒墨汁(粒子)，落到地面形成墨迹。
+- 实现MPM仿真模型
+- 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
+- 在GGUI.canvas中绘制俯视角下墨汁喷洒的轨迹与墨迹
+  - 截取粒子position.x与position.z分量绘制俯视角轨迹
+  - 使用canvas.particle.radius来体现particle.position.z (物理粒子y值越大，canvas上的二维粒子半径越大)
+  - 粒子碰撞地面后的t.disappear时间(大约1~2s)后粒子消散（释放）
+  - [problem] 如何在地面留下墨迹？
+    - [solution(暂定)] 使用floor.buffer记录粒子与地面的碰撞点，并点亮对应的color.buffer
+- (optional) 一点点Gameplay机制：
+  - preset一些不同的武器模型（不同的粒子数量、粒子密度、初速度、粒子集合初始形状...）
+  - move, enemies, hit, score ...
+- (optional) 美化配色
+
+** REFS
+- GGUI
+  - mpm128_ggui : ~ti example -s mpm128_ggui.py~
+  - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
+  - taichi doc : https://docs.taichi-lang.org/docs/ggui
+- Physics
+  - MLS-MPM
+    - mpm128_ggui : ~ti example -s mpm128_ggui.py~
+    - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
+    - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
+>>>>>>> master
         
-* ABOUT ME
-** As a contestant
+** ABOUT US
 - 团队名 :: 先赶紧码出来再去考虑对不 队
 - 项目名 :: Splatoooooon
+- 成员 :: 黎阳 (曾是个Maker，做做digital fabrication: [[https://fabacademy.org/2022/labs/oshanghai/students/yang-li/][my site]]) [Wechat: NicEugeo310], 没了 
