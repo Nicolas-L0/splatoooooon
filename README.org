@@ -44,4 +44,4 @@ In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒�
 ** ABOUT US
 - 团队名 :: 先赶紧码出来再去考虑对不 队
 - 项目名 :: Splatoooooon
-- 成员 :: 黎阳 (曾是个Maker，做做digital fabrication: [[https://fabacademy.org/2022/labs/oshanghai/students/yang-li/][my site]]) [Wechat: NicEugeo310] \\没了 
+- 成员 :: 黎阳 (曾是个Maker，做做digital fabrication: [[https://fabacademy.org/2022/labs/oshanghai/students/yang-li/][my site]]) [Wechat: NicEugeo310], 没了 
