@@ -7,26 +7,6 @@
 
 Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Gameplay机制）。
 
-<<<<<<< HEAD
-** Steps
-- Display
-  - [1/2] GGUI
-    - *ref list*
-      - mpm128_ggui : ~ti example -s mpm128_ggui.py~
-      - taichi doc : https://docs.taichi-lang.org/docs/ggui
-    - [X] try to use GGUI <2022-12-01 周四 22:55>
-    - [ ] use components
-  - [0/1] Rendering
-    - *ref list*
-      - rasterizer.py : ~ti example -s rasterizer.py~
-    - [ ] Rasterizer
-- Physics
-  - MLS-MPM
-    - *ref list*
-      - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
-      - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
-
-=======
 每当在游玩Splatoon时我总会好奇：如果将游戏中这种“高浓度的”墨汁喷洒到现实生活中会形成什么样的墨迹？游戏与现实会有多大区别？完全基于物理仿真实现的墨迹对游戏性能会有多大的"拖累"？
 
 当然，这个项目最大的目的是Push我自己学习Taichi、学习流体仿真。
@@ -60,7 +40,6 @@ In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒�
     - mpm128_ggui : ~ti example -s mpm128_ggui.py~
     - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
     - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
->>>>>>> master
         
 ** ABOUT US
 - 团队名 :: 先赶紧码出来再去考虑对不 队
