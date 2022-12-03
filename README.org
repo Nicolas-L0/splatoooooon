@@ -22,7 +22,6 @@ Splatoooooon is an ink splash simulator, using a physical and almost real way (i
   - [1/2] GGUI
     - *ref list*
       - mpm128_ggui : ~ti example -s mpm128_ggui.py~
-      - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
       - taichi doc : https://docs.taichi-lang.org/docs/ggui
     - [X] try to use GGUI <2022-12-01 周四 22:55>
     - [ ] use components
@@ -34,6 +33,8 @@ Splatoooooon is an ink splash simulator, using a physical and almost real way (i
   - MLS-MPM
     - *ref list*
       - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
+      - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
+
         
 * ABOUT ME
 ** As a contestant
