@@ -11,11 +11,11 @@ Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Game
 
 当然，这个项目最大的目的是Push我自己学习Taichi、学习流体仿真。
 
-/ps. 额啊啊啊..步子迈大了..对初学者来说是一个不小的挑战呢...挠头发.gif...<2022-12-02 周五 18:50>/
+/(ps. 额啊啊啊..步子迈大了..对初学者来说是一个不小的挑战呢...挠头发.gif...<2022-12-02 周五 18:50> )/
 
-/加油... :) ... <2022-12-03 周六 10:40>/
+/(加油... :) ... <2022-12-03 周六 10:40> )/
    
-** Goals (又名 立下Flag)
+** GOALS (又名 立下Flag)
 In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒墨汁(粒子)，落到地面形成墨迹。
 - 实现MPM仿真模型
 - 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
@@ -30,7 +30,7 @@ In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒�
   - move, enemies, hit, score ...
 - (optional) 美化配色
 
-** Refs
+** REFS
 - GGUI
   - mpm128_ggui : ~ti example -s mpm128_ggui.py~
   - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
