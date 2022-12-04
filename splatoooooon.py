@@ -10,12 +10,12 @@ steps = 25
 dt = 2e-4
 GRAVITY = -9.8
 PI = 3.1415
-E = 1000
+E = 800
 #nu = 0.2  #  Poisson's ratio
 #mu_0, lambda_0 = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))  #??? #Lame parameters 
 
 # grid properties
-n_grids = 2**5
+n_grids = 2**6
 g_v = ti.Vector.field(3, float, (n_grids, n_grids, n_grids))
 g_m = ti.field(float, (n_grids, n_grids, n_grids))
 
@@ -28,7 +28,7 @@ p_vol = (dx * 0.5)**2
 p_mass = p_vol * p_rho
 p_x = ti.Vector.field(3, float, n_particles)
 p_x_origin = ti.Vector.field(3, float, shape=())
-p_x_origin[None] = (0.5, 0.5, 0.9)
+p_x_origin[None] = (0.5, 0.5, 0.8)
 p_x_xz = ti.Vector.field(2, float, n_particles)  #particle position without height(y_value)
 p_v = ti.Vector.field(3, float, n_particles)
 p_v0 = 5.0
@@ -106,16 +106,24 @@ def substep():
 def init_particle():
     for n in range(n_particles):
         # shape of particle cluster
-        R = 0.01
+        R = 0.02
         p_colors[n] = (0.1, 0.6, 0.9, 1.0)
-        p_x[n] = p_x_origin[None]
         theta = ti.random() * 2 * PI
         phi = ti.random() * PI
         sin_theta, cos_theta = tm.sin(theta), tm.cos(theta)
         sin_phi, cos_phi = tm.sin(phi), tm.cos(phi)
-        p_x[n] += [R * sin_phi * cos_theta, R * sin_phi * sin_theta, 3 * R * cos_phi]
+
         p_v0_direction[None] = tm.normalize(p_v0_direction[None])
         p_v[n] = p_v0_direction[None] * p_v0
+
+        p_x[n] = [R * sin_phi * cos_theta, R * sin_phi * sin_theta, 3 * R * cos_phi]
+        alpha = tm.acos(tm.dot(p_v0_direction[None], ti.Vector([0, 0, -1])))
+        p_x[n] = ti.Matrix([
+            [tm.cos(alpha), 0, tm.sin(alpha)],
+            [0, 1, 0], 
+            [-tm.sin(alpha), 0, tm.cos(alpha)]]) @ p_x[n]
+        p_x[n] += p_x_origin[None]
+
         p_Jp[n] = 1
         p_C[n] = ti.Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
         #p_dg[n] = ti.Matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
