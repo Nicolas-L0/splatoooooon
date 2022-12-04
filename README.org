@@ -5,11 +5,16 @@
 ** BRIEF INTRO
 /This is a [[https://forum.taichi-lang.cn/t/topic/3506][Taichi Hackathon 2022]] project./
 
+#+begin_example
+        "Press Left-key to shoot, hold Right-key to rotate. ",
+        "The gray particles in the background is the top-down view"
+#+end_example
+
 Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Gameplay机制）。
 
 每当在游玩Splatoon时我总会好奇：如果将游戏中这种“高浓度的”墨汁喷洒到现实生活中会形成什么样的墨迹？游戏与现实会有多大区别？完全基于物理仿真实现的墨迹对游戏性能会有多大的"拖累"？
 
-当然，这个项目最大的目的是Push我自己学习Taichi、学习流体仿真。
+当然这个项目最大的目的是Push我自己学习Taichi、学习流体仿真。
 
 /(ps. 额啊啊啊..步子迈大了..对初学者来说是一个不小的挑战呢...挠头发.gif...<2022-12-02 周五 18:50> )/
 
