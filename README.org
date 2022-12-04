@@ -22,18 +22,19 @@ Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Game
    
 ** GOALS (又名 立下Flag)
 In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒墨汁(粒子)，落到地面形成墨迹。
-- 实现MPM仿真模型
-- 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
-- 在GGUI.canvas中绘制俯视角下墨汁喷洒的轨迹与墨迹
-  - 截取粒子position.x与position.z分量绘制俯视角轨迹
-  - 使用canvas.particle.radius来体现particle.position.z (物理粒子y值越大，canvas上的二维粒子半径越大)
-  - 粒子碰撞地面后的t.disappear时间(大约1~2s)后粒子消散（释放）
-  - [problem] 如何在地面留下墨迹？
+- [X] 实现MPM仿真模型
+- [ ] (doing) 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
+- [1/4] 在GGUI.canvas中绘制俯视角下墨汁喷洒的轨迹与墨迹
+  - [X] 截取粒子position.x与position.z分量绘制俯视角轨迹
+  - [ ] 使用canvas.particle.radius来体现particle.position.z (物理粒子y值越大，canvas上的二维粒子半径越大)
+  - [ ] 粒子碰撞地面后的t.disappear时间(大约1~2s)后粒子消散（释放）
+  - [ ] [problem] 如何在地面留下墨迹？
     - [solution(暂定)] 使用floor.buffer记录粒子与地面的碰撞点，并点亮对应的color.buffer
-- (optional) 一点点Gameplay机制：
+- [X] (optional) 一点点Gameplay机制：
+  - [X] 鼠标控制子弹发射
   - preset一些不同的武器模型（不同的粒子数量、粒子密度、初速度、粒子集合初始形状...）
   - move, enemies, hit, score ...
-- (optional) 美化配色
+- [ ] (optional) 美化配色
 
 ** REFS
 - GGUI
