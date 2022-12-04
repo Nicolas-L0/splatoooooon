@@ -11,8 +11,6 @@ dt = 2e-4
 GRAVITY = -9.8
 PI = 3.1415
 E = 800
-#nu = 0.2  #  Poisson's ratio
-#mu_0, lambda_0 = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))  #??? #Lame parameters 
 
 # grid properties
 n_grids = 2**6
@@ -35,9 +33,8 @@ p_v0 = 5.0
 p_v0_direction = ti.Vector.field(3, float, shape=())
 p_v0_direction[None] = (0, 0, -1)
 p_colors = ti.Vector.field(4, float, n_particles)
-p_C = ti.Matrix.field(3, 3, float, n_particles)  # 
-p_Jp = ti.field(float, n_particles)  #
-#p_dg = ti.Matrix.field(3, 3, float, n_particles)  # deformation gradient
+p_C = ti.Matrix.field(3, 3, float, n_particles)  
+p_Jp = ti.field(float, n_particles)  
 
 
 
@@ -126,7 +123,6 @@ def init_particle():
 
         p_Jp[n] = 1
         p_C[n] = ti.Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
-        #p_dg[n] = ti.Matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 
 
 
