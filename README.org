@@ -1,5 +1,4 @@
 #+filetags: :Taichi_Hackathon_2022:
-#+TODO: [TODO] [DOING] | [DONE]
 
 * Splatoooooon - a crazy ink splash simulator
 ** BRIEF INTRO
@@ -23,13 +22,14 @@ Splatoooooon 是一个墨水喷溅模拟器（可能也会有一点简单的Game
 ** GOALS (又名 立下Flag)
 In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒墨汁(粒子)，落到地面形成墨迹。
 - [X] 实现MPM仿真模型
-- [ ] (doing) 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
+- [X] 使用GGUI的3D scene + components进行实时调参，直观模拟Splatoon中的“高浓度”墨汁
 - [1/4] 在GGUI.canvas中绘制俯视角下墨汁喷洒的轨迹与墨迹
   - [X] 截取粒子position.x与position.z分量绘制俯视角轨迹
   - [ ] 使用canvas.particle.radius来体现particle.position.z (物理粒子y值越大，canvas上的二维粒子半径越大)
   - [ ] 粒子碰撞地面后的t.disappear时间(大约1~2s)后粒子消散（释放）
   - [ ] [problem] 如何在地面留下墨迹？
     - [solution(暂定)] 使用floor.buffer记录粒子与地面的碰撞点，并点亮对应的color.buffer
+- [ ] *墨汁渲染*
 - [X] (optional) 一点点Gameplay机制：
   - [X] 鼠标控制子弹发射
   - preset一些不同的武器模型（不同的粒子数量、粒子密度、初速度、粒子集合初始形状...）
@@ -37,15 +37,16 @@ In brief, 类似俯视角射击游戏，通过鼠标点击向指定方向喷洒�
 - [ ] (optional) 美化配色
 
 ** REFS
-- GGUI
+- Taichi & GGUI
+  - taichi doc : https://docs.taichi-lang.org/docs/ggui
+  - taichi graphic course : https://space.bilibili.com/1779922645/channel/seriesdetail?sid=337716
   - mpm128_ggui : ~ti example -s mpm128_ggui.py~
   - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
-  - taichi doc : https://docs.taichi-lang.org/docs/ggui
 - Physics
-  - MLS-MPM
-    - mpm128_ggui : ~ti example -s mpm128_ggui.py~
-    - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
-    - GAMES201 Lec8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
+  - GAMES201 Lec7/8 : https://www.bilibili.com/video/BV1ZK411H7Hc?p=8
+  - taichi graphic course : https://space.bilibili.com/1779922645/channel/seriesdetail?sid=337716
+  - mpm128_ggui : ~ti example -s mpm128_ggui.py~
+  - mpm3d_ggui : ~ti example -s mpm3d_ggui.py~ 
         
 ** ABOUT US
 - 团队名 :: 先赶紧码出来再去考虑对不 队

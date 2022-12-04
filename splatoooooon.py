@@ -9,7 +9,8 @@ steps = 25
 dt = 2e-4
 GRAVITY = -9.8
 PI = 3.1415
-E = 800
+E = ti.field(float, shape=())
+E[None] = 800
 
 # grid properties
 n_grids = 2**6
@@ -29,7 +30,8 @@ p_x_origin[None] = (0.5, 0.5, 0.2)
 p_x_xz = ti.Vector.field(2, float, n_particles)  #particle position without height(y_value)
 p_x_inverse_z = ti.Vector.field(3, float, n_particles)
 p_v = ti.Vector.field(3, float, n_particles)
-p_v0 = 5.0
+p_v0 = ti.field(float, shape=()) 
+p_v0[None] = 5.0
 p_v0_direction = ti.Vector.field(3, float, shape=())
 p_v0_direction[None] = (0, 0, 1)
 p_colors = ti.Vector.field(4, float, n_particles)
@@ -52,7 +54,7 @@ def substep():
         # Quadratic B-spline
         w = [0.5 * (1.5 - fx)**2, 0.75 - (fx - 1)**2, 0.5 * (fx - 0.5)**2]
 
-        stress = -dt * 4 * E * p_vol * (p_Jp[p] - 1) / dx**2  ##internal force [MSLMPM]
+        stress = -dt * 4 * E[None] * p_vol * (p_Jp[p] - 1) / dx**2  ##internal force [MSLMPM]
         affine = ti.Matrix([[stress, 0, 0], [0, stress, 0], [0, 0, stress]]) + p_mass * p_C[p]  #[MSLMPM]
 
         # loop over 3*3*3 grid node neighbor
@@ -61,7 +63,7 @@ def substep():
             weight = 1.0
             # calculate x y z component for every neighbor grid 
             for i in ti.static(range(3)):
-                weight *= w[offset[i]][i]  #???WHY
+                weight *= w[offset[i]][i] 
             g_v[base + offset] += weight * (p_mass * p_v[p] + affine @ dpos)  #Grid momentum / mass [MSLMPM]
             g_m[base + offset] += weight * p_mass   #Grid mass
     # Grid operations
@@ -69,7 +71,6 @@ def substep():
         if g_m[I] > 0:
             g_v[I] /= g_m[I]
         g_v[I] += dt * ti.Vector([0, GRAVITY, 0])
-        #print(g_v[I])
         # BC
         cond = (I < 3) & (g_v[I] < 0) | (I > n_grids - 3) & (g_v[I] > 0)
         g_v[I] = 0 if cond else g_v[I]
@@ -86,7 +87,7 @@ def substep():
             weight = 1.0
             # calculate x y z component for every neighbor grid 
             for i in ti.static(range(3)):
-                weight *= w[offset[i]][i]  #???WHY
+                weight *= w[offset[i]][i]  
             grid_v = g_v[base + offset]
             new_p_v += weight * grid_v
             new_p_C += 4 * weight * grid_v.outer_product(dpos) / dx**2
@@ -111,9 +112,9 @@ def init_particle():
         sin_phi, cos_phi = tm.sin(phi), tm.cos(phi)
 
         p_v0_direction[None] = tm.normalize(p_v0_direction[None])
-        p_v[n] = p_v0_direction[None] * p_v0
+        p_v[n] = p_v0_direction[None] * p_v0[None]
 
-        p_x[n] = [R * sin_phi * cos_theta, R * sin_phi * sin_theta, p_v0 * 0.5 * R * cos_phi]
+        p_x[n] = [R * sin_phi * cos_theta, R * sin_phi * sin_theta, p_v0[None] * 0.5 * R * cos_phi]
         alpha = tm.acos(tm.dot(p_v0_direction[None], ti.Vector([0, 0, -1])))
         p_x[n] = ti.Matrix([
             [tm.cos(alpha), 0, tm.sin(alpha)],
@@ -146,6 +147,9 @@ def show_options():
     global paused
 
     with gui.sub_window("Options",  0.05, 0.45, 0.2, 0.4) as w:
+        ggui_particales_radius = w.slider_float("particles radius", ggui_particales_radius, 0.001, 0.1)
+        p_v0[None] = w.slider_float("particles initial v", p_v0[None], 0.0, 15)
+        E[None] = w.slider_float("Young's modulus", E[None], 0, 2000)
         if w.button("restart"):
             init_particle()
             paused = True
