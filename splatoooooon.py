@@ -25,12 +25,13 @@ p_vol = (dx * 0.5)**2
 p_mass = p_vol * p_rho
 p_x = ti.Vector.field(3, float, n_particles)
 p_x_origin = ti.Vector.field(3, float, shape=())
-p_x_origin[None] = (0.5, 0.5, 0.8)
+p_x_origin[None] = (0.5, 0.5, 0.2)
 p_x_xz = ti.Vector.field(2, float, n_particles)  #particle position without height(y_value)
+p_x_inverse_z = ti.Vector.field(3, float, n_particles)
 p_v = ti.Vector.field(3, float, n_particles)
 p_v0 = 5.0
 p_v0_direction = ti.Vector.field(3, float, shape=())
-p_v0_direction[None] = (0, 0, -1)
+p_v0_direction[None] = (0, 0, 1)
 p_colors = ti.Vector.field(4, float, n_particles)
 p_C = ti.Matrix.field(3, 3, float, n_particles)  
 p_Jp = ti.field(float, n_particles)  
@@ -94,6 +95,7 @@ def substep():
         p_Jp[p] *= 1 + dt * new_p_C.trace() #particle volume (MSLMPM)
         p_C[p] = new_p_C
         p_x_xz[p] = (p_x[p][0], p_x[p][2])
+        p_x_inverse_z[p] = (p_x[p][0], p_x[p][1], 1 - p_x[p][2])
 
 
 
@@ -111,7 +113,7 @@ def init_particle():
         p_v0_direction[None] = tm.normalize(p_v0_direction[None])
         p_v[n] = p_v0_direction[None] * p_v0
 
-        p_x[n] = [R * sin_phi * cos_theta, R * sin_phi * sin_theta, 3 * R * cos_phi]
+        p_x[n] = [R * sin_phi * cos_theta, R * sin_phi * sin_theta, p_v0 * 0.5 * R * cos_phi]
         alpha = tm.acos(tm.dot(p_v0_direction[None], ti.Vector([0, 0, -1])))
         p_x[n] = ti.Matrix([
             [tm.cos(alpha), 0, tm.sin(alpha)],
@@ -167,8 +169,8 @@ def draw():
     scene.set_camera(camera)
 
     scene.ambient_light((0.5, 0.5, 0.5))
-
-    scene.particles(p_x, per_vertex_color = p_colors, radius = ggui_particales_radius)
+    
+    scene.particles(p_x_inverse_z, per_vertex_color = p_colors, radius = ggui_particales_radius)
     #scene.particles(p_x_origin, per_vertex_color = (1, 1, 1), radius = 0.01)
 
     scene.point_light(pos=(0.5, 1.5, 0.5), color=(0.5, 0.5, 0.5))
@@ -184,12 +186,11 @@ def draw():
     mouse_position[0] = ti.Vector([mouse[0], mouse[1]])
     line_xz[1] = mouse_position[0]
     canvas.circles(mouse_position, color=(0.2, 0.4, 0.6), radius=0.01)
-    canvas.lines(line_xz, color = (0.2, 0.2, 0.2), width = 0.01)
+    canvas.lines(line_xz, color = (0.8, 0.8, 0.8), width = 0.005)
     if window.is_pressed(ti.ui.LMB):
         canvas.circles(mouse_position, color=(0.8, 0.1, 0.1), radius=0.05)
         p_v0_direction[None] = (mouse_position[0][0] - p_x_origin_xz[0][0], 0, mouse_position[0][1] - p_x_origin_xz[0][1])
         init_particle()
-
     
 
 
