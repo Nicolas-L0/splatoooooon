@@ -1,7 +1,6 @@
 import taichi as ti
 import taichi.math as tm
 
-#ti.init(arch=ti.gpu, device_memory_GB=4, packed=True, debug=True)
 ti.init(arch=ti.gpu, debug=True)
 
 # constant
@@ -11,8 +10,6 @@ dt = 2e-4
 GRAVITY = -9.8
 PI = 3.1415
 E = 800
-#nu = 0.2  #  Poisson's ratio
-#mu_0, lambda_0 = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))  #??? #Lame parameters 
 
 # grid properties
 n_grids = 2**6
@@ -35,9 +32,8 @@ p_v0 = 5.0
 p_v0_direction = ti.Vector.field(3, float, shape=())
 p_v0_direction[None] = (0, 0, -1)
 p_colors = ti.Vector.field(4, float, n_particles)
-p_C = ti.Matrix.field(3, 3, float, n_particles)  # 
-p_Jp = ti.field(float, n_particles)  #
-#p_dg = ti.Matrix.field(3, 3, float, n_particles)  # deformation gradient
+p_C = ti.Matrix.field(3, 3, float, n_particles)  
+p_Jp = ti.field(float, n_particles)  
 
 
 
@@ -56,7 +52,6 @@ def substep():
         w = [0.5 * (1.5 - fx)**2, 0.75 - (fx - 1)**2, 0.5 * (fx - 0.5)**2]
 
         stress = -dt * 4 * E * p_vol * (p_Jp[p] - 1) / dx**2  ##internal force [MSLMPM]
-        
         affine = ti.Matrix([[stress, 0, 0], [0, stress, 0], [0, 0, stress]]) + p_mass * p_C[p]  #[MSLMPM]
 
         # loop over 3*3*3 grid node neighbor
@@ -126,7 +121,6 @@ def init_particle():
 
         p_Jp[n] = 1
         p_C[n] = ti.Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
-        #p_dg[n] = ti.Matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 
 
 
@@ -140,7 +134,6 @@ def init_render():
     camera.position(0.5, 1.0, 1.95)
     camera.lookat(0.5, 0.3, 0.5)
     camera.fov(55)
-
 
 
 # init_options
@@ -168,8 +161,6 @@ p_x_origin_xz = ti.Vector.field(2, float, shape=(1, ))
 p_x_origin_xz[0] = ti.Vector([p_x_origin[None][0], p_x_origin[None][2]])
 line_xz = ti.Vector.field(2, dtype=float, shape = 2)
 line_xz[0] = p_x_origin_xz[0]
-
-
 def draw():
     # 3D scene
     camera.track_user_inputs(window, movement_speed=0.03, hold_key=ti.ui.RMB)
@@ -198,6 +189,7 @@ def draw():
         canvas.circles(mouse_position, color=(0.8, 0.1, 0.1), radius=0.05)
         p_v0_direction[None] = (mouse_position[0][0] - p_x_origin_xz[0][0], 0, mouse_position[0][1] - p_x_origin_xz[0][1])
         init_particle()
+
     
 
 
